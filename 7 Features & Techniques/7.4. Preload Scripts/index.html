@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'">
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    We are using Node.js <strong><script>document.write( versions.node)</script></strong>,
+    and Electron <strong><script>document.write( versions.electron )</script></strong>.
+
+    <br><textarea id="content" rows="8" cols="80"></textarea>
+    <br><button id="save" onclick="saveText()">Save Content</button>
+
+    <script>
+
+      const saveText = e => {
+
+        const text = document.getElementById('content').value
+
+        writeToFile( text )
+      }
+
+    </script>
+  </body>
+</html>

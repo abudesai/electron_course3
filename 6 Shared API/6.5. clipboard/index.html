@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'">
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    We are using Node.js <strong><script>document.write( process.versions.node)</script></strong>,
+    and Electron <strong><script>document.write( process.versions.electron )</script></strong>.
+
+    <br><button onclick="makeUpper()">Make clipboard uppercase</button>
+    <br><button onclick="showImage()">Show clipboard image</button>
+
+    <br><img src="" id="cbImage">
+
+    <script>
+
+      const { clipboard } = require('electron')
+
+      console.log( clipboard.readText() )
+
+      const showImage = e => {
+        let image = clipboard.readImage()
+        document.getElementById('cbImage').src = image.toDataURL()
+      }
+
+      const makeUpper = e => {
+        let cbText = clipboard.readText()
+        clipboard.writeText( cbText.toUpperCase() )
+      }
+
+    </script>
+  </body>
+</html>

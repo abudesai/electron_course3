@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'">
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <h1>Convert splash.png:</h1>
+
+    <button onclick="toPng()">PNG</button>
+    <button onclick="toJpg()">JPG</button>
+    <button onclick="toTag()">Show</button>
+    <br><img src="" id="preview">
+
+
+    <script>
+
+      const fs = require('fs')
+      const { nativeImage, remote } = require('electron')
+
+      const splash = nativeImage.createFromPath(`${__dirname}/splash.png`)
+
+      const saveToDesktop = (data, ext) => {
+
+        let desktopPath = remote.app.getPath('desktop')
+        fs.writeFile( `${desktopPath}/splash.${ext}`, data, console.log )
+      }
+
+      const toTag = e => {
+
+        let size = splash.getSize()
+
+        let splashURL = splash.resize({ width: size.width/4, height: size.height/4 }).toDataURL()
+        document.getElementById('preview').src = splashURL
+      }
+      const toPng = e => {
+        let pngSplash = splash.toPNG()
+        saveToDesktop( pngSplash, 'png' )
+      }
+      const toJpg = e => {
+        let jpgSplash = splash.toJPEG(100)
+        saveToDesktop( jpgSplash, 'jpg' )
+      }
+
+    </script>
+  </body>
+</html>

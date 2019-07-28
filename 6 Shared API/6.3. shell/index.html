@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'">
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+
+    <button onclick="showSite()">Launch Electron.js Site</button><br>
+    <button onclick="openSplash()">Open Splash.png</button><br>
+    <button onclick="showSplashFile()">Show Splash.png</button><br>
+    <button onclick="deleteSplashFile()">Delete Splash.png</button><br>
+
+    <script>
+
+      const { shell } = require('electron')
+
+      const showSite = e => {
+        shell.openExternal('https://electronjs.org')
+      }
+
+
+      const splashPath = `${__dirname}/splash.png`
+
+      const openSplash = e => {
+        shell.openItem(splashPath)
+      }
+      const showSplashFile = e => {
+        shell.showItemInFolder(splashPath)
+      }
+      const deleteSplashFile = e => {
+        shell.moveItemToTrash(splashPath)
+      }
+
+    </script>
+  </body>
+</html>

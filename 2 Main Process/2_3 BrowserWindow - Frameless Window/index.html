@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'">
+    <title>Hello World!</title>
+  </head>
+  <body style="user-select:none; -webkit-app-region:drag; padding-top:20px;">
+    <h1>Hello World!</h1>
+
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    We are using Node.js <strong><script>document.write( process.versions.node)</script></strong>,
+    and Electron <strong><script>document.write( process.versions.electron )</script></strong>.
+
+    <br>
+    <br>
+    <input style="-webkit-app-region:no-drag;" type="range" name="range" min="0" max="10">
+
+    <script>
+      // You can also require other files to run in this process
+      require('./renderer.js')
+    </script>
+  </body>
+</html>
